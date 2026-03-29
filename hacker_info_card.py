@@ -1,4 +1,4 @@
-python – hacker_info_card.py
+
 # ===== Hacker Info Card =====
 
 hacker_name  = "Anonymous"
