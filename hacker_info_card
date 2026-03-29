@@ -1,0 +1,20 @@
+python – hacker_info_card.py
+# ===== Hacker Info Card =====
+
+hacker_name  = "Anonymous"
+target_ip    = "10.10.10.5"
+target_port  = 22
+os_used      = "Kali Linux"
+python_ver   = 3.11
+is_vpn_on    = True
+
+print("=" * 35)
+print("     🛡️  HACKER INFO CARD  🛡️")
+print("=" * 35)
+print(f"  Name      : {hacker_name}")
+print(f"  Target IP : {target_ip}")
+print(f"  Port      : {target_port}")
+print(f"  OS        : {os_used}")
+print(f"  Python    : {python_ver}")
+print(f"  VPN       : {is_vpn_on}")
+print("=" * 35)
