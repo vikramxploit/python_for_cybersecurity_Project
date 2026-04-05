@@ -1,28 +1,29 @@
-# ===== Service Scanner =====
+# ===== Port Risk Analyser =====
 
-SERVICES = {
-    21:"FTP", 22:"SSH", 23:"Telnet",
-    25:"SMTP", 53:"DNS", 80:"HTTP",
-    443:"HTTPS", 3306:"MySQL", 8080:"HTTP-Alt"
+open_ports = [21, 22, 80, 443, 3306, 8080, 23]
+
+services = {
+    21: "FTP", 22: "SSH", 23: "Telnet",
+    80: "HTTP", 443: "HTTPS",
+    3306: "MySQL", 8080: "HTTP-Alt"
 }
-RISKY = [21, 23, 3306]
+high_risk = [21, 23, 3306]
 
-def identify(port):
-    return SERVICES.get(port, "Unknown")
+risk_ports = []  # collect risky ones
 
-def risk_level(port):
-    return "HIGH" if port in RISKY else "LOW"
+print("=" * 42)
+print("     🔍 PORT RISK ANALYSER REPORT")
+print("=" * 42)
 
-def scan(ip, open_ports):
-    print(f"\n{'='*45}")
-    print(f"  🔍 TARGET: {ip}")
-    print(f"{'='*45}")
-    for port in open_ports:
-        svc  = identify(port)
-        risk = risk_level(port)
-        icon = "⚠️ " if risk=="HIGH" else "✅"
-        print(f"  {icon} {port:5} | {svc:10} | {risk}")
-    print(f"{'='*45}\n")
+for port in open_ports:
+    svc = services.get(port, "Unknown")
+    if port in high_risk:
+        print(f"  ⚠️  {port:5} | {svc:10} | HIGH RISK")
+        risk_ports.append(port)
+    else:
+        print(f"  ✅  {port:5} | {svc:10} | safe")
 
-# Run the scanner
-scan("192.168.1.1", [22, 80, 21, 443, 3306])
+print("=" * 42)
+print(f"  Total open  : {len(open_ports)}")
+print(f"  High risk   : {len(risk_ports)} ports → {risk_ports}")
+print("=" * 42)
